@@ -14,7 +14,7 @@
  * @private
  */
 
-var nodeStream = require('node:stream')
+var { finished } = require('node:stream')
 var Negotiator = require('negotiator')
 var Buffer = require('safe-buffer').Buffer
 var bytes = require('bytes')
