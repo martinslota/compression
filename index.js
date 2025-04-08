@@ -252,7 +252,7 @@ function compression (options) {
         stream.resume()
       })
 
-      nodeStream.finished(res, function onResponseFinished () {
+      finished(res, function onResponseFinished () {
         if (ended) {
           endOnce.call(res)
         }
