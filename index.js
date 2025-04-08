@@ -14,6 +14,7 @@
  * @private
  */
 
+var nodeStream = require('node:stream')
 var Negotiator = require('negotiator')
 var Buffer = require('safe-buffer').Buffer
 var bytes = require('bytes')
@@ -251,7 +252,7 @@ function compression (options) {
         stream.resume()
       })
 
-      res.socket.on('close', function onSocketClose () {
+      nodeStream.finished(res, function onResponseFinished () {
         if (ended) {
           endOnce.call(res)
         }
