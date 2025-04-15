@@ -88,14 +88,6 @@ function compression (options) {
     var _on = res.on
     var _write = res.write
 
-    var endCalled = false
-    function endOnce () {
-      if (!endCalled) {
-        endCalled = true
-        _end.apply(this, arguments)
-      }
-    }
-
     // flush
     res.flush = function flush () {
       if (stream) {
@@ -134,7 +126,7 @@ function compression (options) {
       }
 
       if (!stream) {
-        return endOnce.call(this, chunk, encoding)
+        return _end.call(this, chunk, encoding)
       }
 
       // mark ended
@@ -241,7 +233,7 @@ function compression (options) {
       })
 
       stream.on('end', function onStreamEnd () {
-        endOnce.call(res)
+        _end.call(res)
       })
 
       _on.call(res, 'drain', function onResponseDrain () {
